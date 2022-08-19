@@ -24,6 +24,18 @@ program.parse();
   //await page.waitForNavigation({waitUntil: 'networkidle2'});
   await page.waitForSelector('.panel-title', { timeout: 60000 });
   await page.waitForTimeout({milliseconds: 30000});
+
+  // Rewrite some styles to be friendlier to the eink
+  await page.addStyleTag({
+  	content: `body {
+  background-color: #FFFFFF;
+  color: #000000;
+}
+
+.css-50qyg5 {
+  padding: 0px;
+}`});
+
   await page.screenshot({path: 'screenshot.png'});
   await browser.close();
 })();
