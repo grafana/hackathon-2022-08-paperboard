@@ -20,6 +20,18 @@ program.parse();
   const page = await browser.newPage();
   await page.goto(options.url);
   await page.waitForNavigation({waitUntil: 'networkidle2'});
+
+  // Rewrite some styles to be friendlier to the eink
+  await page.addStyleTag({
+  	content: `body {
+  background-color: #FFFFFF;
+  color: #000000;
+}
+
+.css-50qyg5 {
+  padding: 0px;
+}`});
+
   await page.screenshot({path: 'screenshot.png'});
   await browser.close();
 })();
